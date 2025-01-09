@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('skill_units', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name', 50);
+            $table->string('symbol', 10);
         });
     }
 

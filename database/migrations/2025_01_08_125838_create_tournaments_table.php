@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->unsignedTinyInteger('gender_id');
-            $table->unsignedBigInteger('winner_id');
+            $table->unsignedBigInteger('winner_id')->nullable();
             $table->timestamp('created_at');
             // FKs definition
             $table->foreign('gender_id')->references('id')->on('genders');
