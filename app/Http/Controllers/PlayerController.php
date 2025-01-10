@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTournamentRequest;
-use App\Models\Tournament;
+use App\Models\Player;
 
 class TournamentController extends Controller
 {
@@ -16,17 +15,9 @@ class TournamentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreTournamentRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(Tournament $tournament)
+    public function show(Player $player)
     {
         //
     }

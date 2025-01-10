@@ -57,4 +57,19 @@ class Player extends Model
     {
         return $this->belongsToMany(Tournament::class, 'participants');
     }
+
+    /**
+     * Returns the skill score by skill ID.
+     * Returns zero if the player does not have that skill.
+     *
+     * @return integer
+     */
+    public function getSkillScore(int $skillId): int
+    {
+        return intval(
+            optional(
+                $this->skills()->where('id', $skillId)
+            )->player_score->score
+        );
+    }
 }
