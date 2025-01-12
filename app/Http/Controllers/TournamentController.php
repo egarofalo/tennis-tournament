@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTournamentRequest;
-use App\Models\Tournament;
+use App\Models\Tournament as TournamentModel;
+use App\Services\TournamentFacade as Tournament;
 
 class TournamentController extends Controller
 {
@@ -12,7 +13,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        //
+        return TournamentModel::all();
     }
 
     /**
@@ -20,14 +21,14 @@ class TournamentController extends Controller
      */
     public function store(StoreTournamentRequest $request)
     {
-        //
+        return Tournament::create($request->validated(), true);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tournament $tournament)
+    public function show(TournamentModel $tournament)
     {
-        //
+        return $tournament;
     }
 }

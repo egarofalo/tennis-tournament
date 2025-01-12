@@ -6,6 +6,7 @@ use App\Models\Player;
 use App\Models\Tournament as TournamentModel;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 abstract class TournamentService implements Tournament
 {
@@ -13,13 +14,34 @@ abstract class TournamentService implements Tournament
      * Creates a male or female tournament.
      *
      * @param array $data
-     * @param int $genderId
+     * @param bool $start
      * @return TournamentModel
      */
-    public function create(array $data, int $genderId): TournamentModel
+    public function create(array $data, bool $start = false): TournamentModel
     {
-        return new TournamentModel($data);
+        return DB::transaction(fn() => tap(
+            TournamentModel::create(Arr::only($data, ['name', 'gender_id'])),
+            function (TournamentModel $tournament) use ($data, $start) {
+                $this->createPlayers($tournament, $data['players']);
+
+                if ($start) {
+                    $tournament->winner()->associate(
+                        $this->start($tournament)
+                    );
+
+                    $tournament->save();
+                }
+            }
+        ));
     }
+
+    /**
+     * Create new players and associate them to the Torunament model.
+     * 
+     * @param TournamentModel $tournament
+     * @param array $players players data
+     */
+    protected abstract function createPlayers(TournamentModel $tournament, array $players): void;
 
     /**
      * Run the tournament and returns the winner.

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             SkillUnitSeeder::class,
             SkillSeeder::class,
-            TournamentSeeder::class,
+            //TournamentSeeder::class,
         ]);
     }
 }

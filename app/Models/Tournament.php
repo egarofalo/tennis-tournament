@@ -38,7 +38,7 @@ class Tournament extends Model
     /**
      * Relation to the winner player of the tournament
      *
-     * @return void
+     * @return BelongsTo
      */
     public function winner(): BelongsTo
     {

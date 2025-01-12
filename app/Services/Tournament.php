@@ -11,10 +11,10 @@ interface Tournament
      * Creates a male or female tournament.
      *
      * @param array $data
-     * @param int $genderId
+     * @param bool $start if true the tournament is run after it is created.
      * @return TournamentModel
      */
-    public function create(array $data, int $genderId): TournamentModel;
+    public function create(array $data, bool $start = false): TournamentModel;
 
     /**
      * Starts the tournament and returns the winner.
