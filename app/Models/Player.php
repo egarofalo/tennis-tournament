@@ -67,7 +67,7 @@ class Player extends Model
     public function getSkillScore(int $skillId): int
     {
         $player_score = optional(
-            $this->skills()->where('skills.id', $skillId)
+            $this->skills()->where('skills.id', $skillId)->first()
         )->player_score;
 
         return intval(optional($player_score)->score);

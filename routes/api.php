@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +16,5 @@ Route::apiResource(
 
 Route::apiResource(
     'players',
-    TournamentController::class
+    PlayerController::class
 )->only(['index', 'show']);
