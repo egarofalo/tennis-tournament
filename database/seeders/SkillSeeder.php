@@ -32,7 +32,7 @@ class SkillSeeder extends Seeder
         Skill::create([
             'id' => Skill::REACTION_TIME,
             'name' => 'Tiempo de reacción',
-            'unit_id' => SkillUnit::SECONDS,
+            'unit_id' => SkillUnit::MILISECONDS,
             'gender_id' => Gender::FEMALE,
         ]);
     }

@@ -39,7 +39,7 @@ class PlayerFactory extends Factory
         ])->afterCreating(function (Player $player) {
             $player->skills()->attach(
                 Skill::REACTION_TIME,
-                ['score' => fake()->numberBetween(1, 100)],
+                ['score' => fake()->numberBetween(100, 1000)],
             );
         });
     }
@@ -55,8 +55,8 @@ class PlayerFactory extends Factory
             'gender_id' => Gender::MALE,
         ])->afterCreating(function (Player $player) {
             $player->skills()->attach([
-                Skill::STRENGTH => ['score' => fake()->numberBetween(1, 100)],
-                Skill::SPEED => ['score' => fake()->numberBetween(1, 100)],
+                Skill::STRENGTH => ['score' => fake()->numberBetween(100, 300)],
+                Skill::SPEED => ['score' => fake()->numberBetween(5, 10)],
             ]);
         });
     }

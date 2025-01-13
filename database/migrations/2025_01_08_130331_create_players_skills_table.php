@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('players_skills', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('score');
+            $table->unsignedSmallInteger('score');
             $table->unsignedBigInteger('player_id');
             $table->unsignedTinyInteger('skill_id');
             // FKs definition

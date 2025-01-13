@@ -52,7 +52,10 @@ class MaleTournament extends TournamentService
         /** @var int speed skill */
         $speed = $player->getSkillScore(Skill::SPEED);
 
+        // strength increase factor (between 1 and 2)
+        $strengthIncreaseFactor = (($strength - 100) / 200) + 1;
+
         // calculate the player skills score
-        return $player->skill_level + $strength + $speed;
+        return round($player->skill_level * $strengthIncreaseFactor) + ($speed * 5);
     }
 }

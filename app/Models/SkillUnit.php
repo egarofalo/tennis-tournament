@@ -21,5 +21,5 @@ class SkillUnit extends Model
     // Model data constants
     const METERS_PER_SECOND = 1;
     const KM_PER_HOUR = 2;
-    const SECONDS = 3;
+    const MILISECONDS = 3;
 }

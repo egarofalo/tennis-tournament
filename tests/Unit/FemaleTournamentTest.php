@@ -37,13 +37,13 @@ class FemaleTournamentTest extends TestCase
     public function test_calculate_player_score_returns_expected_score()
     {
         $player = Mockery::mock(Player::class);
-        $player->shouldReceive('getSkillScore')->with(Skill::REACTION_TIME)->andReturn(40);
+        $player->shouldReceive('getSkillScore')->with(Skill::REACTION_TIME)->andReturn(500);
         $player->shouldReceive('getAttribute')->with('skill_level')->andReturn(80);
 
         /** @var int player score */
         $score = $this->tournament->testCalculatePlayerScore($player);
 
-        $this->assertEquals(120, $score);
+        $this->assertEquals(16, $score);
     }
 
     /**
@@ -55,7 +55,7 @@ class FemaleTournamentTest extends TestCase
     {
         $players = collect(range(1, 8))->map(function ($item) {
             $player = Mockery::mock(Player::class);
-            $player->shouldReceive('getSkillScore')->with(Skill::REACTION_TIME)->andReturn(mt_rand(1, 100));
+            $player->shouldReceive('getSkillScore')->with(Skill::REACTION_TIME)->andReturn(mt_rand(100, 1000));
             $player->shouldReceive('getAttribute')->with('skill_level')->andReturn(mt_rand(1, 100));
             $player->shouldReceive('is')->withAnyArgs()->andReturn($item % 2 !== 0);
 

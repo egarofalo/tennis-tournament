@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Gender;
 use App\Rules\PowerOfTwoArray;
-use App\Rules\SkillMatchesGender;
-use App\Rules\UniqueSkills;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTournamentRequest extends FormRequest
@@ -37,10 +35,10 @@ class StoreTournamentRequest extends FormRequest
             'players.*.name' => 'required|string|max:100',
             'players.*.skill_level' => 'required|integer|min:1|max:100',
             'players.*.male_skills' => 'exclude_unless:gender_id,' . Gender::MALE . '|required|array:strength,speed',
-            'players.*.male_skills.strength' => 'required|integer|min:1|max:100',
-            'players.*.male_skills.speed' => 'required|integer|min:1|max:100',
+            'players.*.male_skills.strength' => 'required|integer|min:100|max:300',
+            'players.*.male_skills.speed' => 'required|integer|min:5|max:10',
             'players.*.female_skills' => 'exclude_unless:gender_id,' . Gender::FEMALE . '|required|array:reaction_time',
-            'players.*.female_skills.reaction_time' => 'required|integer|min:1|max:100',
+            'players.*.female_skills.reaction_time' => 'required|integer|min:100|max:1000',
         ];
     }
 

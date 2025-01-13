@@ -26,9 +26,9 @@ class SkillUnitSeeder extends Seeder
         ]);
 
         SkillUnit::create([
-            'id' => SkillUnit::SECONDS,
-            'name' => 'Segundos',
-            'symbol' => 's',
+            'id' => SkillUnit::MILISECONDS,
+            'name' => 'Milisegundos',
+            'symbol' => 'ms',
         ]);
     }
 }

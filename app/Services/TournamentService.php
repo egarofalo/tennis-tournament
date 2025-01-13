@@ -86,14 +86,16 @@ abstract class TournamentService implements Tournament
      */
     protected function playMatch(Player $playerOne, Player $playerTwo): Player
     {
-        // calculate the luck factor between 1.0 and 1.5
-        $luckFactor = round(mt_rand(100, 150) / 100, 1);
+        // calculate the luck factor between 10% and 30%
+        $luckFactor = round(mt_rand(100, 130) / 100, 1);
 
         /** @var Player randomly select the player to apply the luck factor */
         $luckyPlayer = Arr::random([$playerOne, $playerTwo]);
 
-        // calculate the score for each player with the luck factor applied
+        // calculate the score for player one with the luck factor applied
         $playerOneScore = $this->calculatePlayerScore($playerOne) * ($luckyPlayer->is($playerOne) ? $luckFactor : 1);
+
+        // calculate the score for player two with the luck factor applied
         $playerTwoScore = $this->calculatePlayerScore($playerTwo) * ($luckyPlayer->is($playerTwo) ? $luckFactor : 1);
 
         return $playerOneScore === $playerTwoScore ? $luckyPlayer : (

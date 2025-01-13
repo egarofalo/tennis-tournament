@@ -31,13 +31,13 @@ class MaleTournamentTest extends TestCase
     public function test_calculate_player_score_returns_expected_score()
     {
         $player = Mockery::mock(Player::class);
-        $player->shouldReceive('getSkillScore')->with(Skill::STRENGTH)->andReturn(60);
-        $player->shouldReceive('getSkillScore')->with(Skill::SPEED)->andReturn(80);
-        $player->shouldReceive('getAttribute')->with('skill_level')->andReturn(40);
+        $player->shouldReceive('getSkillScore')->with(Skill::STRENGTH)->andReturn(200);
+        $player->shouldReceive('getSkillScore')->with(Skill::SPEED)->andReturn(8);
+        $player->shouldReceive('getAttribute')->with('skill_level')->andReturn(60);
 
         /** @var int player score */
         $score = $this->tournament->testCalculatePlayerScore($player);
 
-        $this->assertEquals(180, $score);
+        $this->assertEquals(130, $score);
     }
 }

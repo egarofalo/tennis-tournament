@@ -23,12 +23,11 @@ class PlayerResource extends JsonResource
             'name' => $this->name,
             'skill_level' => $this->skill_level,
             'gender' => $this->whenLoaded('gender', fn(Gender $gender) => $gender->name),
-            'skills' => $this->whenLoaded('skills', fn(Collection $skills) => $skills->reduce(
-                fn(array $carry, Skill $skill) => [
-                    ...$carry,
-                    $skill->name => $skill->player_score->score
+            'skills' => $this->whenLoaded('skills', fn(Collection $skills) => $skills->map(
+                fn(Skill $skill) => [
+                    'name' => $skill->name,
+                    'score' => "{$skill->player_score->score}{$skill->unit->symbol}"
                 ],
-                []
             )),
             'tournaments' => TournamentResource::collection($this->whenLoaded('tournaments')),
             'created_at' => Carbon::createFromTimeString(

@@ -1,0 +1,479 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tennis Torunament API",
+        "description": "API que permite simular un torneo de tenis y consultar los resultados.",
+        "contact": {
+            "email": "egarofalo83@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/players": {
+            "get": {
+                "tags": [
+                    "Players"
+                ],
+                "summary": "Obtiene todos los jugadores",
+                "operationId": "a355f9879160729f824bdea53e739b05",
+                "responses": {
+                    "200": {
+                        "description": "Lista de jugadores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "skill_level": {
+                                                "type": "integer"
+                                            },
+                                            "gender": {
+                                                "type": "string"
+                                            },
+                                            "skills": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "score": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "13-01-2025 16:30:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/players/{id}": {
+            "get": {
+                "tags": [
+                    "Players"
+                ],
+                "summary": "Obtiene los detalles de un jugador",
+                "operationId": "dbef515d1b5f749e736bca18efe444e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del jugador",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles de un jugador",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "skill_level": {
+                                                "type": "integer"
+                                            },
+                                            "gender": {
+                                                "type": "string"
+                                            },
+                                            "skills": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "score": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "tournaments": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string",
+                                                            "example": "13-01-2025 16:30:00"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "13-01-2025 16:30:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tournaments": {
+            "get": {
+                "tags": [
+                    "Tournaments"
+                ],
+                "summary": "Obtiene todos los torneos",
+                "operationId": "8626d4f0c19b7c5d27dce357833b6b97",
+                "responses": {
+                    "200": {
+                        "description": "Lista de torneos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "gender": {
+                                                "type": "string"
+                                            },
+                                            "winner": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "skill_level": {
+                                                        "type": "integer"
+                                                    },
+                                                    "gender": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "13-01-2025 16:30:00"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "example": "13-01-2025 16:30:00"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tournaments"
+                ],
+                "summary": "Crear un torneo",
+                "description": "Crear un nuevo torneo con jugadores. Los campos 'male_skills' o 'female_skills' son requeridos dependiendo del valor de 'gender_id'. Por lo tanto en el torneo masculino para cada jugador se debe especificar 'male_skills' y en el femenino 'female_skills'.",
+                "operationId": "d6053f0972883878f37e936e0316a92d",
+                "requestBody": {
+                    "description": "Datos del torneo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "gender_id",
+                                    "name",
+                                    "players"
+                                ],
+                                "properties": {
+                                    "gender_id": {
+                                        "description": "ID del género del torneo (1 para femenino, 2 para masculino).",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "name": {
+                                        "description": "Nombre del torneo.",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Copa Davis Argentina"
+                                    },
+                                    "players": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "name",
+                                                "skill_level"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "description": "Nombre del jugador.",
+                                                    "type": "string",
+                                                    "maxLength": 100,
+                                                    "example": "Roger Federer"
+                                                },
+                                                "skill_level": {
+                                                    "description": "Nivel de habilidad del jugador.",
+                                                    "type": "integer",
+                                                    "example": 99
+                                                },
+                                                "male_skills": {
+                                                    "description": "Se debe especificar cuando se esta creando un torneo masculino",
+                                                    "properties": {
+                                                        "strength": {
+                                                            "description": "Fuerza de saque del jugador masculino.",
+                                                            "type": "integer",
+                                                            "example": 200
+                                                        },
+                                                        "speed": {
+                                                            "description": "Velocidad del jugador masculino.",
+                                                            "type": "integer",
+                                                            "example": 7
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "female_skills": {
+                                                    "description": "Se debe especificar cuando se esta creando un torneo femenino",
+                                                    "properties": {
+                                                        "reaction_time": {
+                                                            "description": "Tiempo de reacción del jugador femenino.",
+                                                            "type": "integer",
+                                                            "example": 500
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Torneo creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 2
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Copa Davis Argentina"
+                                        },
+                                        "winner": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "skill_level": {
+                                                    "type": "integer"
+                                                },
+                                                "gender": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "13-01-2025 16:30:00"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "13-01-2025 16:30:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tournaments/{id}": {
+            "get": {
+                "tags": [
+                    "Tournaments"
+                ],
+                "summary": "Obtiene los detalles de un torneo",
+                "operationId": "6fc0b01dfb2e637254d85be733c11867",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del torneo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del torneo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "gender": {
+                                            "type": "string"
+                                        },
+                                        "winner": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "skill_level": {
+                                                    "type": "integer"
+                                                },
+                                                "gender": {
+                                                    "type": "string"
+                                                },
+                                                "skills": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "score": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "13-01-2025 16:30:00"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "players": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "skill_level": {
+                                                        "type": "integer"
+                                                    },
+                                                    "gender": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "13-01-2025 16:30:00"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Players",
+            "description": "Players"
+        },
+        {
+            "name": "Tournaments",
+            "description": "Tournaments"
+        }
+    ]
+}

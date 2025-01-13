@@ -46,7 +46,10 @@ class FemaleTournament extends TournamentService
         /** @var int reaction time skill */
         $reactionTime = $player->getSkillScore(Skill::REACTION_TIME);
 
+        // reaction time decrease factor (between 0,1 and 1)
+        $reactionTimeDecreaseFactor = 100 / $reactionTime;
+
         // calculate the player skills score
-        return $player->skill_level + $reactionTime;
+        return round($player->skill_level * $reactionTimeDecreaseFactor);
     }
 }
